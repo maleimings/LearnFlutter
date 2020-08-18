@@ -63,6 +63,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -104,6 +110,27 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget> [
+                RaisedButton(
+                  color: Colors.red,
+                  child:Text(
+                    "Decrement",
+                    style: TextStyle(color: Colors.yellow)
+                  ),
+                  onPressed: _decrementCounter,
+                ),
+                RaisedButton(
+                  color: Colors.green,
+                  child: Text(
+                    "Increment",
+                    style: TextStyle(color: Colors.blue)
+                  ),
+                  onPressed: _incrementCounter,
+                )
+              ]
+            )
           ],
         ),
       ),
