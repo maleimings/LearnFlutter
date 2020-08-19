@@ -63,6 +63,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _resetCounter() {
+    setState(() {
+      _counter = 0;
+    });
+  }
+
   void _decrementCounter() {
     setState(() {
       _counter--;
@@ -130,7 +136,25 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: _incrementCounter,
                 )
               ]
-            )
+            ),
+            FloatingActionButton(
+              onPressed: _resetCounter,
+              tooltip: 'Reset Counter',
+              child: Icon(Icons.refresh),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 50, bottom: 50.0),
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.blue.withOpacity(0.25),
+                borderRadius: BorderRadius.circular(4.0)
+              ),
+              child:             Image.asset(
+                'images/flutter.png',
+                width: 200.0,
+              ),
+            ),
+            Text("an image here"),
           ],
         ),
       ),
