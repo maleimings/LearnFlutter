@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -52,6 +54,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  bool _reversed = false;
+  List<UniqueKey> _buttonKeys = [UniqueKey(), UniqueKey()];
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -66,6 +71,13 @@ class _MyHomePageState extends State<MyHomePage> {
   void _resetCounter() {
     setState(() {
       _counter = 0;
+      swap();
+    });
+  }
+
+  void swap() {
+    setState(() {
+      _reversed = !_reversed;
     });
   }
 
@@ -83,6 +95,29 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
+    final incrementButton = FancyButton(
+      child: Text(
+          "Increment",
+        style: TextStyle(color: Colors.white),
+      ),
+      onPressed: _incrementCounter,
+      key: _buttonKeys.first,
+    );
+
+    final decrementButton = FancyButton(
+      child: Text(
+        "decrement",
+        style: TextStyle(color: Colors.white),
+      ),
+      onPressed: _decrementCounter,
+      key: _buttonKeys.last,
+    );
+
+    List<Widget> _buttons = <Widget>[incrementButton, decrementButton];
+    if (_reversed) {
+      _buttons = _buttons.reversed.toList();
+    }
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -155,6 +190,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Text("an image here"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: _buttons,
+            )
           ],
         ),
       ),
@@ -165,4 +204,46 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+class FancyButton extends StatefulWidget {
+  final VoidCallback onPressed;
+  final Widget child;
+
+  const FancyButton({Key key, this.onPressed, this.child}) : super(key: key);
+
+  @override
+  _FancyButtonState createState() => _FancyButtonState();
+}
+
+class _FancyButtonState extends State<FancyButton> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: RaisedButton(
+        child:widget.child,
+        color: _getColors(),
+        onPressed: widget.onPressed,
+      )
+    );
+  }
+
+  Color _getColors() {
+    return _buttonColors.putIfAbsent(this, () => colors[next(0, 5)]);
+  }
+
+  Map<_FancyButtonState, Color> _buttonColors = {};
+
+  final _random = Random();
+
+  int next(int min, int max) => min + _random.nextInt(max - min);
+
+  List<Color> colors = [
+    Colors.blue,
+    Colors.green,
+    Colors.orange,
+    Colors.purple,
+    Colors.amber,
+    Colors.lightBlue,
+  ];
 }
