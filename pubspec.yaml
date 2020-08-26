@@ -51,6 +51,17 @@ flutter:
     - flutter.png
     - images/flutter.png
 
+  fonts:
+    - family: Cabin
+      fonts:
+        - asset: assets/fonts/Cabin-Regular.otf
+        - asset: assets/fonts/Cabin-Bold.otf
+        - asset: assets/fonts/Cabin-Italic.otf
+        - asset: assets/fonts/Cabin-Medium.otf
+        - asset: assets/fonts/Cabin-BoldItalic.otf
+        - asset: assets/fonts/Cabin-MediumItalic.otf
+        - asset: assets/fonts/Cabin-SemiBold.otf
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
