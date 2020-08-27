@@ -140,84 +140,21 @@ class _MyHomePageState extends State<MyHomePage> {
         preferredSize: Size.fromHeight(UiUtils.getAppBarHeight(context)));
     return Scaffold(
       appBar: appBar,
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget> [
-                RaisedButton(
-                  color: Colors.red,
-                  child:Text(
-                    "Decrement",
-                    style: TextStyle(color: Colors.yellow)
-                  ),
-                  onPressed: _decrementCounter,
-                ),
-                RaisedButton(
-                  color: Colors.green,
-                  child: Text(
-                    "Increment",
-                    style: TextStyle(color: Colors.blue)
-                  ),
-                  onPressed: _incrementCounter,
-                )
-              ]
-            ),
-            FloatingActionButton(
-              onPressed: _resetCounter,
-              tooltip: 'Reset Counter',
-              child: Icon(Icons.refresh),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 50, bottom: 50.0),
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.blue.withOpacity(0.25),
-                borderRadius: BorderRadius.circular(4.0)
-              ),
-              child:             Image.asset(
-                'images/flutter.png',
-                width: 200.0,
-              ),
-            ),
-            Text("an image here"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: _buttons,
-            )
-          ],
-        ),
+      body: Stack(
+        children: [
+          Positioned(
+            child: Text("Stack top"),
+            top: 100.0,
+            left: 100.0,
+          ),
+          Positioned(
+            child: Text("Stack next"),
+            top: 120.0,
+            left: 100.0,
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+
     );
   }
 }
